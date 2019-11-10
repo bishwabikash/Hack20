@@ -6,5 +6,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
     <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="angular" level="application" />
+    <orderEntry type="library" name="js?key=AIzaSyAGxWvfTXyTQLWGcFi_qLSf3eT8VRCpdF8&amp;sensor=false&amp;extension=" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jquery-3.3.1" level="application" />
+    <orderEntry type="library" name="gmaps" level="application" />
   </component>
 </module>

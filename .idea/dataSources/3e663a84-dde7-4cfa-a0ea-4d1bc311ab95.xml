@@ -955,31 +955,43 @@
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="238" parent="231" name="PRIMARY">
+    <column id="238" parent="231" name="people">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="239" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="239" parent="232" name="volun_id">
+    <column id="240" parent="232" name="volun_id">
       <Position>1</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="240" parent="232" name="lat">
+    <column id="241" parent="232" name="lat">
       <Position>2</Position>
       <DataType>float(10,6)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="241" parent="232" name="lng">
+    <column id="242" parent="232" name="lng">
       <Position>3</Position>
       <DataType>float(10,6)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="242" parent="232" name="PRIMARY">
+    <column id="243" parent="232" name="ts">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="244" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>volun_id</ColNames>
       <Primary>1</Primary>

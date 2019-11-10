@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Google Maps with AngularJS - jsFiddle demo</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.1/angular.min.js'></script>
+
+
+    <script type='text/javascript'
+            src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGxWvfTXyTQLWGcFi_qLSf3eT8VRCpdF8&sensor=false&extension=.js"></script>
+
+
+    <style type='text/css'>
+        #map {
+            height: 1366px;
+            width: auto;
+        }
+
+        .infoWindowContent {
+            font-size: 14px !important;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        h2 {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+    </style>
+
+
+    <script type='text/javascript'>//<![CDATA[
+
+    //Data
+    var cities = [
+        {
+            city: 'Toronto',
+            desc: 'This is the best city in the world!',
+            lat: 12.719817,
+            long: 77.712311
+        },
+        {
+            city: 'New York',
+            desc: 'This city is aiiiiite!',
+            lat: 12.229052,
+            long: 77.527846
+        },
+        {
+            city: 'Chicago',
+            desc: 'This is the second best city in the world!',
+            lat: 12.183625,
+            long: 77.899534
+        },
+        {
+            city: 'Los Angeles',
+            desc: 'This city is live!',
+            lat: 12.710454,
+            long: 77.11522
+        },
+        {
+            city: 'Las Vegas',
+            desc: 'Sin City...\'nuff said!',
+            lat: 12.525367,
+            long: 77.509506
+        }
+    ];
+
+    //Angular App Module and Controller
+    angular.module('mapsApp', [])
+        .controller('MapCtrl', function ($scope) {
+
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(12.9139, 77.6375),
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+
+            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            $scope.markers = [];
+
+            var infoWindow = new google.maps.InfoWindow();
+
+            var createMarker = function (info) {
+
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    position: new google.maps.LatLng(info.lat, info.long),
+                    title: info.city
+                });
+                marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                    infoWindow.open($scope.map, marker);
+                });
+
+                $scope.markers.push(marker);
+
+            }
+
+            for (i = 0; i < cities.length; i++) {
+                createMarker(cities[i]);
+            }
+
+            $scope.openInfoWindow = function (e, selectedMarker) {
+                e.preventDefault();
+                google.maps.event.trigger(selectedMarker, 'click');
+            }
+
+        });
+    //]]>
+
+    </script>
+
+
+</head>
+<body>
+<div ng-app="mapsApp" ng-controller="MapCtrl">
+    <div id="map"></div>
+    <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
+        <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+    </div>
+</div>
+
+</body>
+
+
+</html>
